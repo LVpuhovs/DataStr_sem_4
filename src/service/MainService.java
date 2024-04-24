@@ -14,6 +14,9 @@ public class MainService {
 		bstWithIntegers.insert(4);
 		try {
 			bstWithIntegers.print();
+			
+			System.out.println("3? -> " + bstWithIntegers.search(3));
+			System.out.println("100? -> " + bstWithIntegers.search(100));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

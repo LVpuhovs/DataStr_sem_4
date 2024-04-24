@@ -23,6 +23,7 @@ public class MyBST<Ttype> {
 			insertHelpRecursive(root, element);
 		}
 	}
+	//remove
 	
 	private void insertHelpRecursive(MyTreeNode tempNode, Ttype element) {
 		if (((Comparable)tempNode.getElement()).compareTo(element) == 1) {
@@ -55,6 +56,7 @@ public class MyBST<Ttype> {
 		if(isEmpty()) throw new Exception("Koks ir tukss");
 		
 		printRecursivePreOrder(root);
+		System.out.println();
 	}
 	
 	private void printRecursivePreOrder(MyTreeNode tempNode) {
@@ -72,6 +74,94 @@ public class MyBST<Ttype> {
 		if(tempNode.getRightCh() != null) {
 			System.out.print(" ->RC: " + tempNode.getRightCh().getElement() + " [" + tempNode.getElement() + "] ");
 			printRecursivePreOrder(tempNode.getRightCh());
+		}
+	}
+	
+	//TODO
+	//1. izveidot search
+	//2. parbaude vai nav tukss
+	//3. ja nav tukss, tad vajag izsaukt helper funkcija
+	//4. uzstaisit helper funkciju prieks meklesanas
+	
+	public boolean search(Ttype element) throws Exception {
+		if (isEmpty()) throw new Exception("Koks tukss");
+		
+		
+		return helpSearch(root, element);
+	}
+	
+	private boolean helpSearch(MyTreeNode tempNode, Ttype element) {
+		if (tempNode.getElement().equals(element))
+			return true;
+		// apakškoka sakne ir lielāks par elementu
+		if (
+	((Comparable) tempNode.getElement()).compareTo(element) == 1) {
+			//ja kreisais bērns eksistē
+			if (tempNode.getLeftCh() != null) 
+			{
+				return helpSearch(tempNode.getLeftCh(), element);
+			}
+		}
+		// saknes elements ir mazaks par element
+		else if (
+	((Comparable) tempNode.getElement()).compareTo(element) == -1) {
+			//ja labais bērns eksistē
+			if (tempNode.getRightCh() != null) 
+			{
+				return helpSearch(tempNode.getRightCh(), element);
+			}
+		}
+		
+		return false;	
+		}
+	
+	public void delete(Ttype element) throws Exception {
+		if(isEmpty()) throw new Exception("Koks tukss");
+		
+		deleteHelp(root, element);
+	}
+	
+	public void deleteHelp (MyTreeNode tempNode, Ttype element) {
+		if (tempNode.getElement().equals(element)) {
+			if(tempNode.getLeftCh() == null && tempNode.getRightCh() == null) {
+				MyTreeNode parent = tempNode.getParent();
+				
+				if(parent.getLeftCh().getElement().equals(element)) {
+					parent.setLeftCh(null);
+				}
+				else if(parent.getRightCh().getElement().equals(element)) {
+					parent.setRightCh(null);
+				}
+			}
+		}
+		if (((Comparable) tempNode.getElement()).compareTo(element) == 1) {
+			//ja kreisais bērns eksistē
+			if (tempNode.getLeftCh() != null) 
+			{
+				deleteHelp(tempNode.getLeftCh(), element);
+			}
+		}	
+		if (((Comparable) tempNode.getElement()).compareTo(element) == -1) {
+			//ja kreisais bērns eksistē
+			if (tempNode.getRightCh() != null) 
+			{
+				helpSearch(tempNode.getRightCh(), element);
+			}
+		}
+		else if(tempNode.getLeftCh() == null && tempNode.getRightCh() != null) {
+			MyTreeNode parent = tempNode.getParent();
+			MyTreeNode leftChild = tempNode.getLeftCh();
+			parent.setLeftCh(leftChild);
+			leftChild.setParent(parent);
+		}
+		else if(tempNode.getLeftCh() != null && tempNode.getRightCh() == null) {
+			MyTreeNode parent = tempNode.getParent();
+			MyTreeNode rightChild = tempNode.getRightCh();
+			parent.setRightCh(rightChild);
+			rightChild.setParent(parent);
+		}
+		else if(tempNode.getLeftCh() != null && tempNode.getRightCh() != null) {
+			
 		}
 	}
 }
