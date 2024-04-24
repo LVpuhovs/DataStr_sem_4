@@ -14,7 +14,11 @@ public class MyBST<Ttype> {
 	}
 	
 	public void insert(Ttype element) {
-		if (isEmpty()) root = new MyTreeNode(element);
+		if (isEmpty()) 
+		{
+			root = new MyTreeNode<Ttype>(element);
+			counter++;
+		}
 		else {
 			insertHelpRecursive(root, element);
 		}
@@ -56,17 +60,17 @@ public class MyBST<Ttype> {
 	private void printRecursivePreOrder(MyTreeNode tempNode) {
 		//root - left - right
 		//root
-		System.out.println(tempNode.getElement());
+		System.out.print(tempNode.getElement());
 		
 		//left
 		if(tempNode.getLeftCh() != null) {
-			System.out.println(" ->LC: " + tempNode.getLeftCh().getElement() + " [ " + tempNode.getElement() + "]");
+			System.out.print(" ->LC: " + tempNode.getLeftCh().getElement() + " [ " + tempNode.getElement() + "] ");
 			printRecursivePreOrder(tempNode.getLeftCh());
 		}
 		//right
 		//ja eksistē labais berns
 		if(tempNode.getRightCh() != null) {
-			System.out.println(" ->LC: " + tempNode.getParent().getElement() + " [ " + tempNode.getElement() + "]");
+			System.out.print(" ->RC: " + tempNode.getRightCh().getElement() + " [" + tempNode.getElement() + "] ");
 			printRecursivePreOrder(tempNode.getRightCh());
 		}
 	}
