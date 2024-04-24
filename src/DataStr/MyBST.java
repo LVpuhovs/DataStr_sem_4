@@ -46,4 +46,28 @@ public class MyBST<Ttype> {
 			System.out.println("Šāds elements jau eksistē BST");
 		}
 	}
+	
+	public void print() throws Exception {
+		if(isEmpty()) throw new Exception("Koks ir tukss");
+		
+		printRecursivePreOrder(root);
+	}
+	
+	private void printRecursivePreOrder(MyTreeNode tempNode) {
+		//root - left - right
+		//root
+		System.out.println(tempNode.getElement());
+		
+		//left
+		if(tempNode.getLeftCh() != null) {
+			System.out.println(" ->LC: " + tempNode.getLeftCh().getElement() + " [ " + tempNode.getElement() + "]");
+			printRecursivePreOrder(tempNode.getLeftCh());
+		}
+		//right
+		//ja eksistē labais berns
+		if(tempNode.getRightCh() != null) {
+			System.out.println(" ->LC: " + tempNode.getParent().getElement() + " [ " + tempNode.getElement() + "]");
+			printRecursivePreOrder(tempNode.getRightCh());
+		}
+	}
 }
