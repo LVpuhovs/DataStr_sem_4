@@ -161,7 +161,26 @@ public class MyBST<Ttype> {
 			rightChild.setParent(parent);
 		}
 		else if(tempNode.getLeftCh() != null && tempNode.getRightCh() != null) {
+			MyTreeNode temp2 = root.getRightCh();
+			while(temp2.getLeftCh()!=null)
+			{
+				temp2 = temp2.getLeftCh();
+			}
+			//temp2 - būs ar to vērtību, kas ir jāieliek ieks tempNode
+			tempNode.setElement(temp2.getElement());
 			
+			MyTreeNode parent = temp2.getParent();
+			if(parent.getLeftCh().equals(temp2))
+			{
+				parent.setLeftCh(null);
+			}
+			else if (parent.getRightCh().equals(temp2))
+			{
+				parent.setRightCh(null);
+			}
 		}
+		
 	}
+	
+	
 }
